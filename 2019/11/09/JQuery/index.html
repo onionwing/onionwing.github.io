@@ -6,13 +6,16 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>Hexo</title>
+  <title>JQuery | Hexo</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta property="og:type" content="website">
-<meta property="og:title" content="Hexo">
-<meta property="og:url" content="http:&#x2F;&#x2F;yoursite.com&#x2F;index.html">
+  <meta name="description" content="JQuery获取对象导入jquery  &#x2F;&#x2F;js写法 var obj=document.querySelector(“对象”) console.log(obj.innerText) &#x2F;&#x2F;jquery写法 $”对象” console.log($”对象”.text) 基本选择器和层级获取对象onionwing  &#x2F;&#x2F;css基本选择器 console.log($(“div”).text) console">
+<meta property="og:type" content="article">
+<meta property="og:title" content="JQuery">
+<meta property="og:url" content="http:&#x2F;&#x2F;yoursite.com&#x2F;2019&#x2F;11&#x2F;09&#x2F;JQuery&#x2F;index.html">
 <meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="JQuery获取对象导入jquery  &#x2F;&#x2F;js写法 var obj=document.querySelector(“对象”) console.log(obj.innerText) &#x2F;&#x2F;jquery写法 $”对象” console.log($”对象”.text) 基本选择器和层级获取对象onionwing  &#x2F;&#x2F;css基本选择器 console.log($(“div”).text) console">
 <meta property="og:locale" content="en">
+<meta property="og:updated_time" content="2019-11-05T03:01:27.019Z">
 <meta name="twitter:card" content="summary">
   
     <link rel="alternative" href="/atom.xml" title="Hexo" type="application/atom+xml">
@@ -149,152 +152,14 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
-  
-    <article id="post-JavaScript1" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+            <article id="post-JQuery" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/11/09/JavaScript1/">JavaScript1</a>
-    </h1>
-  
-
-        
-        <a href="/2019/11/09/JavaScript1/" class="archive-article-date">
-  	<time datetime="2019-11-09T15:28:18.252Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-11-09</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="JavaScript1"><a href="#JavaScript1" class="headerlink" title="JavaScript1     "></a>JavaScript1  <script>   </script></h1><h2 id="基本使用-加了var就是全局变量"><a href="#基本使用-加了var就是全局变量" class="headerlink" title="基本使用  加了var就是全局变量"></a>基本使用  加了var就是全局变量</h2><ul>
-<li>alert(“你好”) //刷新页面时出现          console.log() 相当于print</li>
-<li><script src="引用外部文件"></script> 
-
-
-
-</li>
-</ul>
-<p>var obj=document.getElementsByTagName(“div”)  获取div对象 返回的是数组 //通过获取标签对象，修改属性</p>
-<p>var obj=document.getElementsByClassName(“div”) 获取class对象 返回的是数组 //通过获取class类对象，修改属性</p>
-<p>var obj=document.getElementById(“id”) 获取id对象 返回的是数组 //通过获取id类对象，修改属性</p>
-<p>var obj=document.querySelector(“.class”) //通过css选择器来获取对象：获取第一个</p>
-<p>var obj=document.querySelectorAll(“div”) //通过css选择器来获取对象：获取多个 返回的是数组</p>
-<p>0</p>
-<h2 id="简单事件"><a href="#简单事件" class="headerlink" title="简单事件"></a>简单事件</h2><ul>
-<li><p>点击事件     </p>
-<p> obj.onclick=function(){console.log(“单击”)}</p>
-<p> obj.ondblclick=function(){console.log(“双击”)}</p>
-</li>
-<li><p>鼠标移入移出   </p>
-<p> obj.onmouseenter=function(){obj.style.color=”red”} //进</p>
-<p> obj.onmouseleave=function(){obj.style.color=”yellow”    }  //出</p>
-</li>
-<li><p>窗口变化   当窗口变化了产生反应</p>
-<p> window.onresize=function(){ }</p>
-</li>
-<li><p>下拉框  当下拉框变化了产生反应</p>
-<p>var obj=document.querySelector(“” )</p>
-<p>obj.onchange=function(){  }  //首先你要有一个下拉框哦</p>
-</li>
-</ul>
-<h2 id="样式修改"><a href="#样式修改" class="headerlink" title="样式修改"></a>样式修改</h2><p> obj.style.color=””  //改颜色    改一种样式</p>
-<p>obj.style.cssText=”height:100px;width:50px;backgroud:red;”  //改变多个样式    高100px 宽50px  红色</p>
-<p>//扩展</p>
-<p>obj.style.marginLeft=”10px”右移10px</p>
-<p>obj.style.cssText= A+”:”+B  拼接</p>
-<p>obj.style[“color”]=”yellow”</p>
-<p>//属性的增删改查</p>
-<p>var obj.document.querySelector(“div”);</p>
-<p>//增</p>
-<p>obj.className=”text”  //给div标签添加text的class</p>
-<p>//改</p>
-<p>obj.className=”up”</p>
-<p>//查</p>
-<p>console.log(obj.className)</p>
-<p>//删</p>
-<p>obj.removeAttribute(“class”)</p>
-<p>//自定义属性的增删改查</p>
-<p>//增</p>
-<p>obj.setAttribute(“a”,”b”)  </p>
-<p>//改</p>
-<p>obj.setAttribute(“class”,”b”)  </p>
-<p>//查</p>
-<p>console.log(obj.hasAttribute(“class”))   //返回布尔值</p>
-<p>//删</p>
-<p>obj.removeAttribute(“class”)</p>
-<p>##数据类型   typeof()看类型</p>
-<p>//字符串</p>
-<p>var name =”onionwing”</p>
-<p>//数字</p>
-<p>var age=18</p>
-<p>console.log(typeof(age))</p>
-<p>console.log(typeof NaN)   //not a number: 不是不是数字</p>
-<p>//布尔</p>
-<p>var flag=true</p>
-<p>//undefined</p>
-<p>var a</p>
-<p>console.log(typeof a) //返回undefined</p>
-<p>//null  类型：归于object</p>
-<p>var a=null</p>
-<p>//object类:数组[]  属于一组属性和方法的集合</p>
-<p>var arr=[1,2,3]</p>
-<p>var user={name:”onionwing”,}</p>
-<p>//函数不是数据类型</p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2019/11/09/JavaScript1/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" target="_blank" rel="noopener" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-JQuery" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/11/09/JQuery/">JQuery</a>
+    <h1 class="article-title" itemprop="name">
+      JQuery
     </h1>
   
 
@@ -435,6 +300,27 @@
       
 
       
+        <div class="page-reward">
+          <a href="javascript:;" target="_blank" rel="noopener" class="page-reward-btn tooltip-top">
+            <div class="tooltip tooltip-east">
+            <span class="tooltip-item">
+              赏
+            </span>
+            <span class="tooltip-content">
+              <span class="tooltip-text">
+                <span class="tooltip-inner">
+                  <p class="reward-p"><i class="icon icon-quo-left"></i>谢谢你请我吃糖果<i class="icon icon-quo-right"></i></p>
+                  <div class="reward-box">
+                    
+                    
+                  </div>
+                </span>
+              </span>
+            </span>
+          </div>
+          </a>
+        </div>
+      
     </div>
     <div class="article-info article-info-index">
       
@@ -442,16 +328,79 @@
       
 
       
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2019/11/09/JQuery/">展开全文 >></a>
-        </p>
-      
 
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" target="_blank" rel="noopener" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" target="_blank" rel="noopener" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" target="_blank" rel="noopener" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" target="_blank" rel="noopener" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" target="_blank" rel="noopener" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" target="_blank" rel="noopener" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" target="_blank" rel="noopener" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" target="_blank" rel="noopener" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" target="_blank" rel="noopener" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
+        </div>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;" target="_blank" rel="noopener"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/2019/11/09/JQuery/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
       
       <div class="clearfix"></div>
     </div>
   </div>
 </article>
+
+  
+<nav id="article-nav">
+  
+    <a href="/2019/11/09/JavaScript1/" id="article-nav-newer" class="article-nav-link-wrap">
+      <i class="icon-circle-left"></i>
+      <div class="article-nav-title">
+        
+          JavaScript1
+        
+      </div>
+    </a>
+  
+  
+</nav>
+
 
 <aside class="wrap-side-operation">
     <div class="mod-side-operation">
@@ -471,8 +420,14 @@
 
 
 
+  
+  
+  
 
   
+
+  
+
   
 
 
@@ -499,8 +454,8 @@
     <script>
 	var yiliaConfig = {
 		mathjax: false,
-		isHome: true,
-		isPost: false,
+		isHome: false,
+		isPost: true,
 		isArchive: false,
 		isTag: false,
 		isCategory: false,
