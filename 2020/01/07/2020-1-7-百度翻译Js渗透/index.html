@@ -1,0 +1,179 @@
+
+<!DOCTYPE html>
+<html lang="zh_CN" class="loading">
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>百度翻译Js渗透 - OnionWing之家</title>
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="google" content="notranslate" />
+    <meta name="keywords" content="OinonWing,"> 
+    <meta name="description" content="随便写写
+1234567891011121314151617181920212223242526272829303132333435363738394041424344454647484950515,"> 
+    <meta name="author" content="Oinon Wing"> 
+    <link rel="alternative" href="atom.xml" title="OnionWing之家" type="application/atom+xml"> 
+    <link rel="icon" href="/img/favicon.png"> 
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.css">
+    <link rel="stylesheet" href="/css/diaspora.css">
+    <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+    <script>
+         (adsbygoogle = window.adsbygoogle || []).push({
+              google_ad_client: "ca-pub-8691406134231910",
+              enable_page_level_ads: true
+         });
+    </script>
+    <script async custom-element="amp-auto-ads"
+        src="https://cdn.ampproject.org/v0/amp-auto-ads-0.1.js">
+    </script>
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?3de58bd09f157571f6fa3896bf8c9f65";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+</head>
+
+<body class="loading">
+    <span id="config-title" style="display:none">OnionWing之家</span>
+    <div id="loader"></div>
+    <div id="single">
+    <div id="top" style="display: block;">
+    <div class="bar" style="width: 0;"></div>
+    <a class="icon-home image-icon" href="javascript:;" data-url="http://yoursite.com"></a>
+    <div title="播放/暂停" class="icon-play"></div>
+    <h3 class="subtitle">百度翻译Js渗透</h3>
+    <div class="social">
+        <!--<div class="like-icon">-->
+            <!--<a href="javascript:;" class="likeThis active"><span class="icon-like"></span><span class="count">76</span></a>-->
+        <!--</div>-->
+        <div>
+            <div class="share">
+                <a title="获取二维码" class="icon-scan" href="javascript:;"></a>
+            </div>
+            <div id="qr"></div>
+        </div>
+    </div>
+    <div class="scrollbar"></div>
+</div>
+
+    <div class="section">
+        <div class="article">
+    <div class='main'>
+        <h1 class="title">百度翻译Js渗透</h1>
+        <div class="stuff">
+            <span>一月 07, 2020</span>
+            
+  <ul class="post-tags-list" itemprop="keywords"><li class="post-tags-list-item"><a class="post-tags-list-link" href="/tags/js%E6%B8%97%E9%80%8F/" rel="tag">js渗透</a></li><li class="post-tags-list-item"><a class="post-tags-list-link" href="/tags/python/" rel="tag">python</a></li><li class="post-tags-list-item"><a class="post-tags-list-link" href="/tags/%E5%AD%A6%E4%B9%A0/" rel="tag">学习</a></li></ul>
+
+
+        </div>
+        <div class="content markdown">
+            <p>随便写写</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> execjs</span><br><span class="line"><span class="keyword">import</span> requests</span><br><span class="line"><span class="keyword">import</span> re</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">BaiduTrans</span><span class="params">()</span>:</span></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self, string, target)</span>:</span></span><br><span class="line">        self.string = string</span><br><span class="line">        self.target = target</span><br><span class="line"></span><br><span class="line">        self.sel = self.lag_sel()</span><br><span class="line">        self.sess = requests.Session()</span><br><span class="line">        self.sess.headers = &#123;</span><br><span class="line">            <span class="string">"user-agent"</span>: <span class="string">"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/79.0.3945.88 Safari/537.36"</span></span><br><span class="line">        &#125;</span><br><span class="line">        self.lag1 = self.lag_from()</span><br><span class="line">        <span class="keyword">with</span> open(<span class="string">"./js渗透_百度翻译.js"</span>, <span class="string">"r"</span>, encoding=<span class="string">'utf8'</span>) <span class="keyword">as</span> f:</span><br><span class="line">            js = f.read()</span><br><span class="line">        self.js = execjs.compile(js)</span><br><span class="line">        self.gtk, self.token = self.gtk_token()</span><br><span class="line">        self.sign = self.get_sign()</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">lag_sel</span><span class="params">(self)</span>:</span></span><br><span class="line">        sel = &#123;<span class="string">"阿拉伯语"</span>: <span class="string">"ara"</span>, <span class="string">"英语"</span>: <span class="string">"en"</span>, <span class="string">"日语"</span>: <span class="string">"jp"</span>, <span class="string">"中文"</span>: <span class="string">"zh"</span>, <span class="string">"文言文"</span>: <span class="string">"wyw"</span>,</span><br><span class="line">               <span class="string">"法语"</span>: <span class="string">"fra"</span>, <span class="string">"韩语"</span>: <span class="string">"kor"</span>, <span class="string">"意大利语"</span>: <span class="string">"it"</span>, <span class="string">"泰语"</span>: <span class="string">"th"</span>, <span class="string">"德语"</span>: <span class="string">"de"</span>,</span><br><span class="line">               <span class="string">"爱沙尼亚语"</span>: <span class="string">"est"</span>, <span class="string">"保加利亚语"</span>: <span class="string">"bul"</span>, <span class="string">"波兰语"</span>: <span class="string">"est"</span>, <span class="string">"俄语"</span>: <span class="string">"ru"</span>,</span><br><span class="line">               <span class="string">"芬兰语"</span>: <span class="string">"fin"</span>, <span class="string">"荷兰语"</span>: <span class="string">"nl"</span>, <span class="string">"捷克语"</span>: <span class="string">"cs"</span>, <span class="string">"丹麦语"</span>: <span class="string">"dan"</span>, <span class="string">"越南语"</span>: <span class="string">"vie"</span>,</span><br><span class="line">               <span class="string">"葡萄牙语"</span>: <span class="string">"pt"</span>, <span class="string">"瑞典语"</span>: <span class="string">"swe"</span>, <span class="string">"罗马尼亚语"</span>: <span class="string">"rom"</span>, <span class="string">"粤语"</span>: <span class="string">"yue"</span>, <span class="string">"中文繁体"</span>: <span class="string">"cht"</span>,</span><br><span class="line">               <span class="string">"斯洛文尼亚语"</span>: <span class="string">"slo"</span>, <span class="string">"西班牙语"</span>: <span class="string">"spa"</span>, <span class="string">"希腊语"</span>: <span class="string">"el"</span>, <span class="string">"匈牙利语"</span>: <span class="string">"hu"</span>&#125;</span><br><span class="line">        sel = sel[self.target]</span><br><span class="line">        <span class="keyword">return</span> sel</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">lag_from</span><span class="params">(self)</span>:</span></span><br><span class="line">        <span class="keyword">pass</span></span><br><span class="line">        <span class="keyword">return</span> self.sess.post(<span class="string">"https://fanyi.baidu.com/langdetect"</span>, data=&#123;<span class="string">"query"</span>: self.string, &#125;).json()[<span class="string">"lan"</span>]</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">gtk_token</span><span class="params">(self)</span>:</span></span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">2</span>):</span><br><span class="line">            r = self.sess.get(<span class="string">"https://fanyi.baidu.com/"</span>)</span><br><span class="line">            gtk = re.search(<span class="string">r"window.gtk = '(.*?)';"</span>, r.text).group(<span class="number">1</span>)</span><br><span class="line">            token = re.search(<span class="string">r"token: '(.*?)',"</span>, r.text).group(<span class="number">1</span>)</span><br><span class="line">        <span class="keyword">return</span> gtk, token</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">get_sign</span><span class="params">(self)</span>:</span></span><br><span class="line">        <span class="keyword">pass</span></span><br><span class="line">        <span class="keyword">return</span> self.js.call(<span class="string">"e"</span>, self.string, self.gtk)</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">translation</span><span class="params">(self)</span>:</span></span><br><span class="line">        data = &#123;</span><br><span class="line">                <span class="string">"from"</span>: self.lag1,</span><br><span class="line">                <span class="string">"to"</span>: self.sel,</span><br><span class="line">                <span class="string">"query"</span>: self.string,</span><br><span class="line">                <span class="string">"simple_means_flag"</span>: <span class="string">"3"</span>,</span><br><span class="line">                <span class="string">"sign"</span>: self.sign,</span><br><span class="line">                <span class="string">"token"</span>: self.token,</span><br><span class="line">                 &#125;</span><br><span class="line">        r = self.sess.post(<span class="string">f"https://fanyi.baidu.com/v2transapi?from=<span class="subst">&#123;self.lag1&#125;</span>&amp;to=<span class="subst">&#123;self.sel&#125;</span>"</span>, data=data)</span><br><span class="line">        print(r.json()[<span class="string">"trans_result"</span>][<span class="string">"data"</span>][<span class="number">0</span>][<span class="string">"dst"</span>])</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">'__main__'</span>:</span><br><span class="line">    print(<span class="string">"需要翻译的文字"</span>)</span><br><span class="line">    connect = input(<span class="string">"请输入："</span>)</span><br><span class="line">    print(<span class="string">"需要翻译成的语言（不能有空格请规范输入）"</span>)</span><br><span class="line">    language = input(<span class="string">"请输入："</span>)</span><br><span class="line">    start = BaiduTrans(connect, language)</span><br><span class="line">    start.translation()</span><br></pre></td></tr></table></figure>
+
+
+            <!--[if lt IE 9]><script>document.createElement('audio');</script><![endif]-->
+            <audio id="audio" loop="1" preload="auto" controls="controls" data-autoplay="false">
+                <source type="audio/mpeg" src="">
+            </audio>
+            
+                <ul id="audio-list" style="display:none">
+                    
+                        
+                            <li title='0' data-url='http://link.hhtjim.com/163/5146554.mp3'></li>
+                        
+                    
+                        
+                            <li title='1' data-url='http://link.hhtjim.com/qq/001faIUs4M2zna.mp3'></li>
+                        
+                    
+                </ul>
+            
+        </div>
+        
+    <div id='gitalk-container' class="comment link"
+        data-ae='false'
+        data-ci=''
+        data-cs=''
+        data-r=''
+        data-o=''
+        data-a=''
+        data-d='false'
+    >查看评论</div>
+
+
+    </div>
+    
+</div>
+
+
+    </div>
+</div>
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"debug":false,"model":{"jsonPath":"/live2dw/assets/koharu.model.json"},"display":{"position":"right","width":145,"height":315},"mobile":{"show":true,"scale":1},"react":{"opacityDefault":0.7,"opacityOnHover":0.8},"log":false});</script></body>
+<script src="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js"></script>
+<script src="//lib.baomitu.com/jquery/1.8.3/jquery.min.js"></script>
+<script src="/js/plugin.js"></script>
+<script src="/js/diaspora.js"></script>
+<link rel="stylesheet" href="/photoswipe/photoswipe.css">
+<link rel="stylesheet" href="/photoswipe/default-skin/default-skin.css">
+<script src="/photoswipe/photoswipe.min.js"></script>
+<script src="/photoswipe/photoswipe-ui-default.min.js"></script>
+
+<!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+    <!-- Background of PhotoSwipe. 
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+        <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+            <div class="pswp__top-bar">
+                <!--  Controls are self-explanatory. Order can be changed. -->
+                <div class="pswp__counter"></div>
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                      <div class="pswp__preloader__cut">
+                        <div class="pswp__preloader__donut"></div>
+                      </div>
+                    </div>
+                </div>
+            </div>
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div> 
+            </div>
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+</html>
