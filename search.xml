@@ -1,6 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>百度翻译Js渗透</title>
+    <url>/2020/01/07/2020-1-7-%E7%99%BE%E5%BA%A6%E7%BF%BB%E8%AF%91Js%E6%B8%97%E9%80%8F/</url>
+    <content><![CDATA[<p>随便写写</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> execjs</span><br><span class="line"><span class="keyword">import</span> requests</span><br><span class="line"><span class="keyword">import</span> re</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">BaiduTrans</span><span class="params">()</span>:</span></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self, string, target)</span>:</span></span><br><span class="line">        self.string = string</span><br><span class="line">        self.target = target</span><br><span class="line"></span><br><span class="line">        self.sel = self.lag_sel()</span><br><span class="line">        self.sess = requests.Session()</span><br><span class="line">        self.sess.headers = &#123;</span><br><span class="line">            <span class="string">"user-agent"</span>: <span class="string">"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/79.0.3945.88 Safari/537.36"</span></span><br><span class="line">        &#125;</span><br><span class="line">        self.lag1 = self.lag_from()</span><br><span class="line">        <span class="keyword">with</span> open(<span class="string">"./js渗透_百度翻译.js"</span>, <span class="string">"r"</span>, encoding=<span class="string">'utf8'</span>) <span class="keyword">as</span> f:</span><br><span class="line">            js = f.read()</span><br><span class="line">        self.js = execjs.compile(js)</span><br><span class="line">        self.gtk, self.token = self.gtk_token()</span><br><span class="line">        self.sign = self.get_sign()</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">lag_sel</span><span class="params">(self)</span>:</span></span><br><span class="line">        sel = &#123;<span class="string">"阿拉伯语"</span>: <span class="string">"ara"</span>, <span class="string">"英语"</span>: <span class="string">"en"</span>, <span class="string">"日语"</span>: <span class="string">"jp"</span>, <span class="string">"中文"</span>: <span class="string">"zh"</span>, <span class="string">"文言文"</span>: <span class="string">"wyw"</span>,</span><br><span class="line">               <span class="string">"法语"</span>: <span class="string">"fra"</span>, <span class="string">"韩语"</span>: <span class="string">"kor"</span>, <span class="string">"意大利语"</span>: <span class="string">"it"</span>, <span class="string">"泰语"</span>: <span class="string">"th"</span>, <span class="string">"德语"</span>: <span class="string">"de"</span>,</span><br><span class="line">               <span class="string">"爱沙尼亚语"</span>: <span class="string">"est"</span>, <span class="string">"保加利亚语"</span>: <span class="string">"bul"</span>, <span class="string">"波兰语"</span>: <span class="string">"est"</span>, <span class="string">"俄语"</span>: <span class="string">"ru"</span>,</span><br><span class="line">               <span class="string">"芬兰语"</span>: <span class="string">"fin"</span>, <span class="string">"荷兰语"</span>: <span class="string">"nl"</span>, <span class="string">"捷克语"</span>: <span class="string">"cs"</span>, <span class="string">"丹麦语"</span>: <span class="string">"dan"</span>, <span class="string">"越南语"</span>: <span class="string">"vie"</span>,</span><br><span class="line">               <span class="string">"葡萄牙语"</span>: <span class="string">"pt"</span>, <span class="string">"瑞典语"</span>: <span class="string">"swe"</span>, <span class="string">"罗马尼亚语"</span>: <span class="string">"rom"</span>, <span class="string">"粤语"</span>: <span class="string">"yue"</span>, <span class="string">"中文繁体"</span>: <span class="string">"cht"</span>,</span><br><span class="line">               <span class="string">"斯洛文尼亚语"</span>: <span class="string">"slo"</span>, <span class="string">"西班牙语"</span>: <span class="string">"spa"</span>, <span class="string">"希腊语"</span>: <span class="string">"el"</span>, <span class="string">"匈牙利语"</span>: <span class="string">"hu"</span>&#125;</span><br><span class="line">        sel = sel[self.target]</span><br><span class="line">        <span class="keyword">return</span> sel</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">lag_from</span><span class="params">(self)</span>:</span></span><br><span class="line">        <span class="keyword">pass</span></span><br><span class="line">        <span class="keyword">return</span> self.sess.post(<span class="string">"https://fanyi.baidu.com/langdetect"</span>, data=&#123;<span class="string">"query"</span>: self.string, &#125;).json()[<span class="string">"lan"</span>]</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">gtk_token</span><span class="params">(self)</span>:</span></span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">2</span>):</span><br><span class="line">            r = self.sess.get(<span class="string">"https://fanyi.baidu.com/"</span>)</span><br><span class="line">            gtk = re.search(<span class="string">r"window.gtk = '(.*?)';"</span>, r.text).group(<span class="number">1</span>)</span><br><span class="line">            token = re.search(<span class="string">r"token: '(.*?)',"</span>, r.text).group(<span class="number">1</span>)</span><br><span class="line">        <span class="keyword">return</span> gtk, token</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">get_sign</span><span class="params">(self)</span>:</span></span><br><span class="line">        <span class="keyword">pass</span></span><br><span class="line">        <span class="keyword">return</span> self.js.call(<span class="string">"e"</span>, self.string, self.gtk)</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">translation</span><span class="params">(self)</span>:</span></span><br><span class="line">        data = &#123;</span><br><span class="line">                <span class="string">"from"</span>: self.lag1,</span><br><span class="line">                <span class="string">"to"</span>: self.sel,</span><br><span class="line">                <span class="string">"query"</span>: self.string,</span><br><span class="line">                <span class="string">"simple_means_flag"</span>: <span class="string">"3"</span>,</span><br><span class="line">                <span class="string">"sign"</span>: self.sign,</span><br><span class="line">                <span class="string">"token"</span>: self.token,</span><br><span class="line">                 &#125;</span><br><span class="line">        r = self.sess.post(<span class="string">f"https://fanyi.baidu.com/v2transapi?from=<span class="subst">&#123;self.lag1&#125;</span>&amp;to=<span class="subst">&#123;self.sel&#125;</span>"</span>, data=data)</span><br><span class="line">        print(r.json()[<span class="string">"trans_result"</span>][<span class="string">"data"</span>][<span class="number">0</span>][<span class="string">"dst"</span>])</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">'__main__'</span>:</span><br><span class="line">    print(<span class="string">"需要翻译的文字"</span>)</span><br><span class="line">    connect = input(<span class="string">"请输入："</span>)</span><br><span class="line">    print(<span class="string">"需要翻译成的语言（不能有空格请规范输入）"</span>)</span><br><span class="line">    language = input(<span class="string">"请输入："</span>)</span><br><span class="line">    start = BaiduTrans(connect, language)</span><br><span class="line">    start.translation()</span><br></pre></td></tr></table></figure>
+
+]]></content>
+      <categories>
+        <category>2020年1月</category>
+      </categories>
+      <tags>
+        <tag>学习</tag>
+        <tag>python</tag>
+        <tag>js渗透</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>JavaScript学习2</title>
     <url>/2019/11/10/JavaScript2/</url>
     <content><![CDATA[<h1 id="JavaScript2"><a href="#JavaScript2" class="headerlink" title="JavaScript2"></a>JavaScript2</h1><h2 id="算术运算符-数与数的计算-–"><a href="#算术运算符-数与数的计算-–" class="headerlink" title="算术运算符  数与数的计算   +  -  *  /  ++  –  %"></a>算术运算符  数与数的计算   +  -  *  /  ++  –  %</h2><h3 id="数和字符的运算"><a href="#数和字符的运算" class="headerlink" title="数和字符的运算"></a>数和字符的运算</h3><p>+是拼接并转为数字</p>
@@ -98,63 +114,17 @@ arr.sort(function(a,b){
       </tags>
   </entry>
   <entry>
-    <title>百度翻译Js渗透</title>
-    <url>/2020/01/07/2020-1-7-%E7%99%BE%E5%BA%A6%E7%BF%BB%E8%AF%91Js%E6%B8%97%E9%80%8F/</url>
-    <content><![CDATA[<p>随便写写</p>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> execjs</span><br><span class="line"><span class="keyword">import</span> requests</span><br><span class="line"><span class="keyword">import</span> re</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">BaiduTrans</span><span class="params">()</span>:</span></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self, string, target)</span>:</span></span><br><span class="line">        self.string = string</span><br><span class="line">        self.target = target</span><br><span class="line"></span><br><span class="line">        self.sel = self.lag_sel()</span><br><span class="line">        self.sess = requests.Session()</span><br><span class="line">        self.sess.headers = &#123;</span><br><span class="line">            <span class="string">"user-agent"</span>: <span class="string">"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/79.0.3945.88 Safari/537.36"</span></span><br><span class="line">        &#125;</span><br><span class="line">        self.lag1 = self.lag_from()</span><br><span class="line">        <span class="keyword">with</span> open(<span class="string">"./js渗透_百度翻译.js"</span>, <span class="string">"r"</span>, encoding=<span class="string">'utf8'</span>) <span class="keyword">as</span> f:</span><br><span class="line">            js = f.read()</span><br><span class="line">        self.js = execjs.compile(js)</span><br><span class="line">        self.gtk, self.token = self.gtk_token()</span><br><span class="line">        self.sign = self.get_sign()</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">lag_sel</span><span class="params">(self)</span>:</span></span><br><span class="line">        sel = &#123;<span class="string">"阿拉伯语"</span>: <span class="string">"ara"</span>, <span class="string">"英语"</span>: <span class="string">"en"</span>, <span class="string">"日语"</span>: <span class="string">"jp"</span>, <span class="string">"中文"</span>: <span class="string">"zh"</span>, <span class="string">"文言文"</span>: <span class="string">"wyw"</span>,</span><br><span class="line">               <span class="string">"法语"</span>: <span class="string">"fra"</span>, <span class="string">"韩语"</span>: <span class="string">"kor"</span>, <span class="string">"意大利语"</span>: <span class="string">"it"</span>, <span class="string">"泰语"</span>: <span class="string">"th"</span>, <span class="string">"德语"</span>: <span class="string">"de"</span>,</span><br><span class="line">               <span class="string">"爱沙尼亚语"</span>: <span class="string">"est"</span>, <span class="string">"保加利亚语"</span>: <span class="string">"bul"</span>, <span class="string">"波兰语"</span>: <span class="string">"est"</span>, <span class="string">"俄语"</span>: <span class="string">"ru"</span>,</span><br><span class="line">               <span class="string">"芬兰语"</span>: <span class="string">"fin"</span>, <span class="string">"荷兰语"</span>: <span class="string">"nl"</span>, <span class="string">"捷克语"</span>: <span class="string">"cs"</span>, <span class="string">"丹麦语"</span>: <span class="string">"dan"</span>, <span class="string">"越南语"</span>: <span class="string">"vie"</span>,</span><br><span class="line">               <span class="string">"葡萄牙语"</span>: <span class="string">"pt"</span>, <span class="string">"瑞典语"</span>: <span class="string">"swe"</span>, <span class="string">"罗马尼亚语"</span>: <span class="string">"rom"</span>, <span class="string">"粤语"</span>: <span class="string">"yue"</span>, <span class="string">"中文繁体"</span>: <span class="string">"cht"</span>,</span><br><span class="line">               <span class="string">"斯洛文尼亚语"</span>: <span class="string">"slo"</span>, <span class="string">"西班牙语"</span>: <span class="string">"spa"</span>, <span class="string">"希腊语"</span>: <span class="string">"el"</span>, <span class="string">"匈牙利语"</span>: <span class="string">"hu"</span>&#125;</span><br><span class="line">        sel = sel[self.target]</span><br><span class="line">        <span class="keyword">return</span> sel</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">lag_from</span><span class="params">(self)</span>:</span></span><br><span class="line">        <span class="keyword">pass</span></span><br><span class="line">        <span class="keyword">return</span> self.sess.post(<span class="string">"https://fanyi.baidu.com/langdetect"</span>, data=&#123;<span class="string">"query"</span>: self.string, &#125;).json()[<span class="string">"lan"</span>]</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">gtk_token</span><span class="params">(self)</span>:</span></span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">2</span>):</span><br><span class="line">            r = self.sess.get(<span class="string">"https://fanyi.baidu.com/"</span>)</span><br><span class="line">            gtk = re.search(<span class="string">r"window.gtk = '(.*?)';"</span>, r.text).group(<span class="number">1</span>)</span><br><span class="line">            token = re.search(<span class="string">r"token: '(.*?)',"</span>, r.text).group(<span class="number">1</span>)</span><br><span class="line">        <span class="keyword">return</span> gtk, token</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">get_sign</span><span class="params">(self)</span>:</span></span><br><span class="line">        <span class="keyword">pass</span></span><br><span class="line">        <span class="keyword">return</span> self.js.call(<span class="string">"e"</span>, self.string, self.gtk)</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">translation</span><span class="params">(self)</span>:</span></span><br><span class="line">        data = &#123;</span><br><span class="line">                <span class="string">"from"</span>: self.lag1,</span><br><span class="line">                <span class="string">"to"</span>: self.sel,</span><br><span class="line">                <span class="string">"query"</span>: self.string,</span><br><span class="line">                <span class="string">"simple_means_flag"</span>: <span class="string">"3"</span>,</span><br><span class="line">                <span class="string">"sign"</span>: self.sign,</span><br><span class="line">                <span class="string">"token"</span>: self.token,</span><br><span class="line">                 &#125;</span><br><span class="line">        r = self.sess.post(<span class="string">f"https://fanyi.baidu.com/v2transapi?from=<span class="subst">&#123;self.lag1&#125;</span>&amp;to=<span class="subst">&#123;self.sel&#125;</span>"</span>, data=data)</span><br><span class="line">        print(r.json()[<span class="string">"trans_result"</span>][<span class="string">"data"</span>][<span class="number">0</span>][<span class="string">"dst"</span>])</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">'__main__'</span>:</span><br><span class="line">    print(<span class="string">"需要翻译的文字"</span>)</span><br><span class="line">    connect = input(<span class="string">"请输入："</span>)</span><br><span class="line">    print(<span class="string">"需要翻译成的语言（不能有空格请规范输入）"</span>)</span><br><span class="line">    language = input(<span class="string">"请输入："</span>)</span><br><span class="line">    start = BaiduTrans(connect, language)</span><br><span class="line">    start.translation()</span><br></pre></td></tr></table></figure>
-
-]]></content>
-      <categories>
-        <category>2020年1月</category>
-      </categories>
-      <tags>
-        <tag>学习</tag>
-        <tag>python</tag>
-        <tag>js渗透</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>JavaScript学习1</title>
-    <url>/2019/11/10/JavaScript1/</url>
-    <content><![CDATA[<h1 id="JavaScript1"><a href="#JavaScript1" class="headerlink" title="JavaScript1     "></a>JavaScript1  <script>   </script></h1><h2 id="基本使用-加了var就是全局变量"><a href="#基本使用-加了var就是全局变量" class="headerlink" title="基本使用  加了var就是全局变量"></a>基本使用  加了var就是全局变量</h2><ul>
-<li>alert(“你好”) //刷新页面时出现          console.log() 相当于print</li>
-<li><script src="引用外部文件"></script> 
-
-</li>
-</ul>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> obj=<span class="built_in">document</span>.getElementsByTagName(<span class="string">"div"</span>)  获取div对象 返回的是数组 <span class="comment">//通过获取标签对象，修改属性</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> obj=<span class="built_in">document</span>.getElementsByClassName(<span class="string">"div"</span>) 获取<span class="class"><span class="keyword">class</span>对象 返回的是数组 //通过获取<span class="title">class</span>类对象，修改属性</span></span><br><span class="line"><span class="class"></span></span><br><span class="line"><span class="class"><span class="title">var</span> <span class="title">obj</span></span>=<span class="built_in">document</span>.getElementById(<span class="string">"id"</span>) 获取id对象 返回的是数组 <span class="comment">//通过获取id类对象，修改属性</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> obj=<span class="built_in">document</span>.querySelector(<span class="string">".class"</span>) <span class="comment">//通过css选择器来获取对象：获取第一个</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> obj=<span class="built_in">document</span>.querySelectorAll(<span class="string">"div"</span>) <span class="comment">//通过css选择器来获取对象：获取多个 返回的是数组</span></span><br></pre></td></tr></table></figure>
+    <title>Python  turtle</title>
+    <url>/2019/11/12/Python3%20%20turtle/</url>
+    <content><![CDATA[<h1 id="Python3-turtle"><a href="#Python3-turtle" class="headerlink" title="Python3  turtle"></a>Python3  turtle</h1><h2 id="画笔运动命令"><a href="#画笔运动命令" class="headerlink" title="画笔运动命令:"></a>画笔运动命令:</h2><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">turtle.forward(distance)  //向当前画笔方向移动distance像素长</span><br><span class="line">turtle.backward(distance) // 向当前画笔相反方向移动distance像素长度</span><br><span class="line">turtle.right(degree) //顺时针移动degree°</span><br><span class="line">turtle.left(degree) //逆时针移动degree°</span><br><span class="line">turtle.pendown() //移动时绘制图形,缺省时也为绘制</span><br><span class="line">turtle.goto(x,y) //将画笔移动到坐标为x,y的位置</span><br><span class="line">turtle.penup() //移动时不绘制图形,提起笔，用于另起一个地方绘制时用</span><br><span class="line">turtle.speed(speed)// 画笔绘制的速度范围[0,10]整数</span><br><span class="line">turtle.circle() //画圆,半径为正(负),表示圆心在画笔的左边(右边)画圆</span><br></pre></td></tr></table></figure>
 
 
 
-<h2 id="简单事件"><a href="#简单事件" class="headerlink" title="简单事件"></a>简单事件</h2><ul>
-<li><pre><code class="javascript">- 点击事件     
-
-  obj.onclick=<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>{<span class="built_in">console</span>.log(<span class="string">"单击"</span>)}
-
-  obj.ondblclick=<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>{<span class="built_in">console</span>.log(<span class="string">"双击"</span>)}
-
-- 鼠标移入移出   
-
-  obj.onmouseenter=<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>{obj.style.color=<span class="string">"red"</span>} <span class="comment">//进</span>
-
-  obj.onmouseleave=<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>{obj.style.color=<span class="string">"yellow"</span>    }  <span class="comment">//出</span>
-
-- 窗口变化   当窗口变化了产生反应
-
-  <span class="built_in">window</span>.onresize=<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>{ }
-
-- 下拉框  当下拉框变化了产生反应
-
-  <span class="keyword">var</span> obj=<span class="built_in">document</span>.querySelector(<span class="string">""</span> )
-
-  obj.onchange=<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>{  }  <span class="comment">//首先你要有一个下拉框哦</span>
-&lt;!--￼<span class="number">1</span>--&gt;
+<h2 id="画笔控制命令"><a href="#画笔控制命令" class="headerlink" title="画笔控制命令:"></a>画笔控制命令:</h2><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">turtle.pensize(width)// 绘制图形时的宽度</span><br><span class="line">turtle.pencolor()// 画笔颜色</span><br><span class="line">turtle.fillcolor(colorstring) // 绘制图形的填充颜色</span><br><span class="line">turtle.color(color1, color2) // 同时设置pencolor=color1, fillcolor=color2</span><br><span class="line">turtle.filling() // 返回当前是否在填充状态</span><br><span class="line">turtle.begin_fill() // 准备开始填充图形</span><br><span class="line">turtle.end_fill() // 填充完成；</span><br><span class="line">turtle.hideturtle() // 隐藏箭头显示；</span><br><span class="line">turtle.showturtle() // 与hideturtle()函数对应</span><br></pre></td></tr></table></figure>
 
 
-</code></pre>
-</li>
-</ul>
-<h2 id="数据类型-typeof-看类型"><a href="#数据类型-typeof-看类型" class="headerlink" title="数据类型   typeof()看类型"></a>数据类型   typeof()看类型</h2><figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="comment">//字符串</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> name =<span class="string">"onionwing"</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//数字</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> age=<span class="number">18</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(<span class="keyword">typeof</span>(age))</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(<span class="keyword">typeof</span> <span class="literal">NaN</span>)   <span class="comment">//not a number: 不是不是数字</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//布尔</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> flag=<span class="literal">true</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//undefined</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> a</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(<span class="keyword">typeof</span> a) <span class="comment">//返回undefined</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//null  类型：归于object</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> a=<span class="literal">null</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//object类:数组[]  属于一组属性和方法的集合</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> arr=[<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>]</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> user=&#123;<span class="attr">name</span>:<span class="string">"onionwing"</span>,&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//函数不是数据类型</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="全局控制命令"><a href="#全局控制命令" class="headerlink" title="全局控制命令:"></a>全局控制命令:</h2><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">turtle.clear() // 清空turtle窗口，但是turtle的位置和状态不会改变</span><br><span class="line">turtle.reset() // 清空窗口，重置turtle状态为起始状态</span><br><span class="line">turtle.undo() // 撤销上一个turtle动作</span><br><span class="line">turtle.isvisible() // 返回当前turtle是否可见</span><br><span class="line">stamp() // 复制当前图形</span><br><span class="line">turtle.write(s[,font=(&quot;font-name&quot;,font_size,&quot;font_type&quot;)]) // 写文本，s为文本内容，font是字体的参数，里面分别为字体名称，大小和类型；font为可选项, font的参数也是可选项</span><br></pre></td></tr></table></figure>
 
 ]]></content>
       <categories>
@@ -162,7 +132,7 @@ arr.sort(function(a,b){
       </categories>
       <tags>
         <tag>学习</tag>
-        <tag>js</tag>
+        <tag>python</tag>
       </tags>
   </entry>
   <entry>
@@ -291,28 +261,6 @@ arr.sort(function(a,b){
       </tags>
   </entry>
   <entry>
-    <title>Python  turtle</title>
-    <url>/2019/11/12/Python3%20%20turtle/</url>
-    <content><![CDATA[<h1 id="Python3-turtle"><a href="#Python3-turtle" class="headerlink" title="Python3  turtle"></a>Python3  turtle</h1><h2 id="画笔运动命令"><a href="#画笔运动命令" class="headerlink" title="画笔运动命令:"></a>画笔运动命令:</h2><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">turtle.forward(distance)  //向当前画笔方向移动distance像素长</span><br><span class="line">turtle.backward(distance) // 向当前画笔相反方向移动distance像素长度</span><br><span class="line">turtle.right(degree) //顺时针移动degree°</span><br><span class="line">turtle.left(degree) //逆时针移动degree°</span><br><span class="line">turtle.pendown() //移动时绘制图形,缺省时也为绘制</span><br><span class="line">turtle.goto(x,y) //将画笔移动到坐标为x,y的位置</span><br><span class="line">turtle.penup() //移动时不绘制图形,提起笔，用于另起一个地方绘制时用</span><br><span class="line">turtle.speed(speed)// 画笔绘制的速度范围[0,10]整数</span><br><span class="line">turtle.circle() //画圆,半径为正(负),表示圆心在画笔的左边(右边)画圆</span><br></pre></td></tr></table></figure>
-
-
-
-<h2 id="画笔控制命令"><a href="#画笔控制命令" class="headerlink" title="画笔控制命令:"></a>画笔控制命令:</h2><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">turtle.pensize(width)// 绘制图形时的宽度</span><br><span class="line">turtle.pencolor()// 画笔颜色</span><br><span class="line">turtle.fillcolor(colorstring) // 绘制图形的填充颜色</span><br><span class="line">turtle.color(color1, color2) // 同时设置pencolor=color1, fillcolor=color2</span><br><span class="line">turtle.filling() // 返回当前是否在填充状态</span><br><span class="line">turtle.begin_fill() // 准备开始填充图形</span><br><span class="line">turtle.end_fill() // 填充完成；</span><br><span class="line">turtle.hideturtle() // 隐藏箭头显示；</span><br><span class="line">turtle.showturtle() // 与hideturtle()函数对应</span><br></pre></td></tr></table></figure>
-
-
-
-<h2 id="全局控制命令"><a href="#全局控制命令" class="headerlink" title="全局控制命令:"></a>全局控制命令:</h2><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">turtle.clear() // 清空turtle窗口，但是turtle的位置和状态不会改变</span><br><span class="line">turtle.reset() // 清空窗口，重置turtle状态为起始状态</span><br><span class="line">turtle.undo() // 撤销上一个turtle动作</span><br><span class="line">turtle.isvisible() // 返回当前turtle是否可见</span><br><span class="line">stamp() // 复制当前图形</span><br><span class="line">turtle.write(s[,font=(&quot;font-name&quot;,font_size,&quot;font_type&quot;)]) // 写文本，s为文本内容，font是字体的参数，里面分别为字体名称，大小和类型；font为可选项, font的参数也是可选项</span><br></pre></td></tr></table></figure>
-
-]]></content>
-      <categories>
-        <category>2019年11月</category>
-      </categories>
-      <tags>
-        <tag>学习</tag>
-        <tag>python</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>人生只能一路向前</title>
     <url>/9999/11/11/%E4%BA%BA%E7%94%9F%E5%8F%AA%E8%83%BD%E4%B8%80%E8%B7%AF%E5%90%91%E5%89%8D/</url>
     <content><![CDATA[<p>欢迎来到编程小学生onionwing的博客</p>
@@ -348,6 +296,58 @@ arr.sort(function(a,b){
       <tags>
         <tag>学习</tag>
         <tag>爬虫</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>JavaScript学习1</title>
+    <url>/2019/11/10/JavaScript1/</url>
+    <content><![CDATA[<h1 id="JavaScript1"><a href="#JavaScript1" class="headerlink" title="JavaScript1     "></a>JavaScript1  <script>   </script></h1><h2 id="基本使用-加了var就是全局变量"><a href="#基本使用-加了var就是全局变量" class="headerlink" title="基本使用  加了var就是全局变量"></a>基本使用  加了var就是全局变量</h2><ul>
+<li>alert(“你好”) //刷新页面时出现          console.log() 相当于print</li>
+<li><script src="引用外部文件"></script> 
+
+</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> obj=<span class="built_in">document</span>.getElementsByTagName(<span class="string">"div"</span>)  获取div对象 返回的是数组 <span class="comment">//通过获取标签对象，修改属性</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> obj=<span class="built_in">document</span>.getElementsByClassName(<span class="string">"div"</span>) 获取<span class="class"><span class="keyword">class</span>对象 返回的是数组 //通过获取<span class="title">class</span>类对象，修改属性</span></span><br><span class="line"><span class="class"></span></span><br><span class="line"><span class="class"><span class="title">var</span> <span class="title">obj</span></span>=<span class="built_in">document</span>.getElementById(<span class="string">"id"</span>) 获取id对象 返回的是数组 <span class="comment">//通过获取id类对象，修改属性</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> obj=<span class="built_in">document</span>.querySelector(<span class="string">".class"</span>) <span class="comment">//通过css选择器来获取对象：获取第一个</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> obj=<span class="built_in">document</span>.querySelectorAll(<span class="string">"div"</span>) <span class="comment">//通过css选择器来获取对象：获取多个 返回的是数组</span></span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="简单事件"><a href="#简单事件" class="headerlink" title="简单事件"></a>简单事件</h2><ul>
+<li><pre><code class="javascript">- 点击事件     
+
+  obj.onclick=<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>{<span class="built_in">console</span>.log(<span class="string">"单击"</span>)}
+
+  obj.ondblclick=<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>{<span class="built_in">console</span>.log(<span class="string">"双击"</span>)}
+
+- 鼠标移入移出   
+
+  obj.onmouseenter=<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>{obj.style.color=<span class="string">"red"</span>} <span class="comment">//进</span>
+
+  obj.onmouseleave=<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>{obj.style.color=<span class="string">"yellow"</span>    }  <span class="comment">//出</span>
+
+- 窗口变化   当窗口变化了产生反应
+
+  <span class="built_in">window</span>.onresize=<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>{ }
+
+- 下拉框  当下拉框变化了产生反应
+
+  <span class="keyword">var</span> obj=<span class="built_in">document</span>.querySelector(<span class="string">""</span> )
+
+  obj.onchange=<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>{  }  <span class="comment">//首先你要有一个下拉框哦</span>
+&lt;!--￼<span class="number">1</span>--&gt;
+
+
+</code></pre>
+</li>
+</ul>
+<h2 id="数据类型-typeof-看类型"><a href="#数据类型-typeof-看类型" class="headerlink" title="数据类型   typeof()看类型"></a>数据类型   typeof()看类型</h2><figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="comment">//字符串</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> name =<span class="string">"onionwing"</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//数字</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> age=<span class="number">18</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(<span class="keyword">typeof</span>(age))</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(<span class="keyword">typeof</span> <span class="literal">NaN</span>)   <span class="comment">//not a number: 不是不是数字</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//布尔</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> flag=<span class="literal">true</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//undefined</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> a</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(<span class="keyword">typeof</span> a) <span class="comment">//返回undefined</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//null  类型：归于object</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> a=<span class="literal">null</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//object类:数组[]  属于一组属性和方法的集合</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> arr=[<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>]</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> user=&#123;<span class="attr">name</span>:<span class="string">"onionwing"</span>,&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//函数不是数据类型</span></span><br></pre></td></tr></table></figure>
+
+]]></content>
+      <categories>
+        <category>2019年11月</category>
+      </categories>
+      <tags>
+        <tag>学习</tag>
+        <tag>js</tag>
       </tags>
   </entry>
 </search>
