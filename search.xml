@@ -17,58 +17,6 @@
       </tags>
   </entry>
   <entry>
-    <title>JavaScript学习1</title>
-    <url>/2019/11/10/JavaScript1/</url>
-    <content><![CDATA[<h1 id="JavaScript1"><a href="#JavaScript1" class="headerlink" title="JavaScript1     "></a>JavaScript1  <script>   </script></h1><h2 id="基本使用-加了var就是全局变量"><a href="#基本使用-加了var就是全局变量" class="headerlink" title="基本使用  加了var就是全局变量"></a>基本使用  加了var就是全局变量</h2><ul>
-<li>alert(“你好”) //刷新页面时出现          console.log() 相当于print</li>
-<li><script src="引用外部文件"></script> 
-
-</li>
-</ul>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> obj=<span class="built_in">document</span>.getElementsByTagName(<span class="string">"div"</span>)  获取div对象 返回的是数组 <span class="comment">//通过获取标签对象，修改属性</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> obj=<span class="built_in">document</span>.getElementsByClassName(<span class="string">"div"</span>) 获取<span class="class"><span class="keyword">class</span>对象 返回的是数组 //通过获取<span class="title">class</span>类对象，修改属性</span></span><br><span class="line"><span class="class"></span></span><br><span class="line"><span class="class"><span class="title">var</span> <span class="title">obj</span></span>=<span class="built_in">document</span>.getElementById(<span class="string">"id"</span>) 获取id对象 返回的是数组 <span class="comment">//通过获取id类对象，修改属性</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> obj=<span class="built_in">document</span>.querySelector(<span class="string">".class"</span>) <span class="comment">//通过css选择器来获取对象：获取第一个</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> obj=<span class="built_in">document</span>.querySelectorAll(<span class="string">"div"</span>) <span class="comment">//通过css选择器来获取对象：获取多个 返回的是数组</span></span><br></pre></td></tr></table></figure>
-
-
-
-<h2 id="简单事件"><a href="#简单事件" class="headerlink" title="简单事件"></a>简单事件</h2><ul>
-<li><pre><code class="javascript">- 点击事件     
-
-  obj.onclick=<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>{<span class="built_in">console</span>.log(<span class="string">"单击"</span>)}
-
-  obj.ondblclick=<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>{<span class="built_in">console</span>.log(<span class="string">"双击"</span>)}
-
-- 鼠标移入移出   
-
-  obj.onmouseenter=<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>{obj.style.color=<span class="string">"red"</span>} <span class="comment">//进</span>
-
-  obj.onmouseleave=<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>{obj.style.color=<span class="string">"yellow"</span>    }  <span class="comment">//出</span>
-
-- 窗口变化   当窗口变化了产生反应
-
-  <span class="built_in">window</span>.onresize=<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>{ }
-
-- 下拉框  当下拉框变化了产生反应
-
-  <span class="keyword">var</span> obj=<span class="built_in">document</span>.querySelector(<span class="string">""</span> )
-
-  obj.onchange=<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>{  }  <span class="comment">//首先你要有一个下拉框哦</span>
-&lt;!--￼<span class="number">1</span>--&gt;
-
-
-</code></pre>
-</li>
-</ul>
-<h2 id="数据类型-typeof-看类型"><a href="#数据类型-typeof-看类型" class="headerlink" title="数据类型   typeof()看类型"></a>数据类型   typeof()看类型</h2><figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="comment">//字符串</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> name =<span class="string">"onionwing"</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//数字</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> age=<span class="number">18</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(<span class="keyword">typeof</span>(age))</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(<span class="keyword">typeof</span> <span class="literal">NaN</span>)   <span class="comment">//not a number: 不是不是数字</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//布尔</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> flag=<span class="literal">true</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//undefined</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> a</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(<span class="keyword">typeof</span> a) <span class="comment">//返回undefined</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//null  类型：归于object</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> a=<span class="literal">null</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//object类:数组[]  属于一组属性和方法的集合</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> arr=[<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>]</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> user=&#123;<span class="attr">name</span>:<span class="string">"onionwing"</span>,&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//函数不是数据类型</span></span><br></pre></td></tr></table></figure>
-
-]]></content>
-      <categories>
-        <category>2019年11月</category>
-      </categories>
-      <tags>
-        <tag>学习</tag>
-        <tag>js</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>Docker学习</title>
     <url>/2020/03/14/Docker%E5%AD%A6%E4%B9%A0/</url>
     <content><![CDATA[<h1 id="Docker学习"><a href="#Docker学习" class="headerlink" title="Docker学习"></a>Docker学习</h1><h2 id="docker-ce安装"><a href="#docker-ce安装" class="headerlink" title="docker-ce安装"></a>docker-ce安装</h2><p><a href="https://docs.docker.com/install/linux/docker-ce/centos/">官方安装</a></p>
@@ -225,6 +173,58 @@ arr.sort(function(a,b){
 </li>
 </ul>
 <h2 id="补充方法"><a href="#补充方法" class="headerlink" title="补充方法"></a>补充方法</h2><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">var a= 123.666</span><br><span class="line"></span><br><span class="line">//tostring</span><br><span class="line"></span><br><span class="line">var b=a.toString()   //b变为了str</span><br><span class="line"></span><br><span class="line">//tofixed  四舍五入</span><br><span class="line"></span><br><span class="line">var b=a.toFixed()  //b==124</span><br><span class="line"></span><br><span class="line">//parseint	转换成int,parseFloat转换成float</span><br><span class="line"></span><br><span class="line">//Number</span><br><span class="line"></span><br><span class="line">console.log(Number(b))  转换成数字</span><br><span class="line"></span><br><span class="line">//isNanN    是的   不是一个整形</span><br><span class="line"></span><br><span class="line">console.log(isNaN(var))  //faluse</span><br><span class="line"></span><br><span class="line">//isArrary   方法在Array里面   判断是不是数组</span><br><span class="line"></span><br><span class="line">console.log(isArray.isArray())</span><br></pre></td></tr></table></figure>
+
+]]></content>
+      <categories>
+        <category>2019年11月</category>
+      </categories>
+      <tags>
+        <tag>学习</tag>
+        <tag>js</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>JavaScript学习1</title>
+    <url>/2019/11/10/JavaScript1/</url>
+    <content><![CDATA[<h1 id="JavaScript1"><a href="#JavaScript1" class="headerlink" title="JavaScript1     "></a>JavaScript1  <script>   </script></h1><h2 id="基本使用-加了var就是全局变量"><a href="#基本使用-加了var就是全局变量" class="headerlink" title="基本使用  加了var就是全局变量"></a>基本使用  加了var就是全局变量</h2><ul>
+<li>alert(“你好”) //刷新页面时出现          console.log() 相当于print</li>
+<li><script src="引用外部文件"></script> 
+
+</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> obj=<span class="built_in">document</span>.getElementsByTagName(<span class="string">"div"</span>)  获取div对象 返回的是数组 <span class="comment">//通过获取标签对象，修改属性</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> obj=<span class="built_in">document</span>.getElementsByClassName(<span class="string">"div"</span>) 获取<span class="class"><span class="keyword">class</span>对象 返回的是数组 //通过获取<span class="title">class</span>类对象，修改属性</span></span><br><span class="line"><span class="class"></span></span><br><span class="line"><span class="class"><span class="title">var</span> <span class="title">obj</span></span>=<span class="built_in">document</span>.getElementById(<span class="string">"id"</span>) 获取id对象 返回的是数组 <span class="comment">//通过获取id类对象，修改属性</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> obj=<span class="built_in">document</span>.querySelector(<span class="string">".class"</span>) <span class="comment">//通过css选择器来获取对象：获取第一个</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> obj=<span class="built_in">document</span>.querySelectorAll(<span class="string">"div"</span>) <span class="comment">//通过css选择器来获取对象：获取多个 返回的是数组</span></span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="简单事件"><a href="#简单事件" class="headerlink" title="简单事件"></a>简单事件</h2><ul>
+<li><pre><code class="javascript">- 点击事件     
+
+  obj.onclick=<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>{<span class="built_in">console</span>.log(<span class="string">"单击"</span>)}
+
+  obj.ondblclick=<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>{<span class="built_in">console</span>.log(<span class="string">"双击"</span>)}
+
+- 鼠标移入移出   
+
+  obj.onmouseenter=<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>{obj.style.color=<span class="string">"red"</span>} <span class="comment">//进</span>
+
+  obj.onmouseleave=<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>{obj.style.color=<span class="string">"yellow"</span>    }  <span class="comment">//出</span>
+
+- 窗口变化   当窗口变化了产生反应
+
+  <span class="built_in">window</span>.onresize=<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>{ }
+
+- 下拉框  当下拉框变化了产生反应
+
+  <span class="keyword">var</span> obj=<span class="built_in">document</span>.querySelector(<span class="string">""</span> )
+
+  obj.onchange=<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>{  }  <span class="comment">//首先你要有一个下拉框哦</span>
+&lt;!--￼<span class="number">1</span>--&gt;
+
+
+</code></pre>
+</li>
+</ul>
+<h2 id="数据类型-typeof-看类型"><a href="#数据类型-typeof-看类型" class="headerlink" title="数据类型   typeof()看类型"></a>数据类型   typeof()看类型</h2><figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="comment">//字符串</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> name =<span class="string">"onionwing"</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//数字</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> age=<span class="number">18</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(<span class="keyword">typeof</span>(age))</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(<span class="keyword">typeof</span> <span class="literal">NaN</span>)   <span class="comment">//not a number: 不是不是数字</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//布尔</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> flag=<span class="literal">true</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//undefined</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> a</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(<span class="keyword">typeof</span> a) <span class="comment">//返回undefined</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//null  类型：归于object</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> a=<span class="literal">null</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//object类:数组[]  属于一组属性和方法的集合</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> arr=[<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>]</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> user=&#123;<span class="attr">name</span>:<span class="string">"onionwing"</span>,&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//函数不是数据类型</span></span><br></pre></td></tr></table></figure>
 
 ]]></content>
       <categories>
