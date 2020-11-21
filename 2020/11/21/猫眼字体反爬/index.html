@@ -1,0 +1,177 @@
+
+<!DOCTYPE html>
+<html lang="zh_CN" class="loading">
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>猫眼字体反爬 - OnionWing之家</title>
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="google" content="notranslate" />
+    <meta name="keywords" content="Fechin,"> 
+    <meta name="description" content="分析浏览器调试窗口发现只有综合票房是争对爬虫进行了反爬
+在network中发现每隔5s左右会重新申请数据，并且woff字体文件也会重新生成
+123456789101112131415#找出woff文,"> 
+    <meta name="author" content="Oinon Wing"> 
+    <link rel="alternative" href="atom.xml" title="OnionWing之家" type="application/atom+xml"> 
+    <link rel="icon" href="/img/favicon.png"> 
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.css">
+    <link rel="stylesheet" href="/css/diaspora.css">
+	<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+    <script>
+         (adsbygoogle = window.adsbygoogle || []).push({
+              google_ad_client: "ca-pub-8691406134231910",
+              enable_page_level_ads: true
+         });
+    </script>
+    <script async custom-element="amp-auto-ads"
+        src="https://cdn.ampproject.org/v0/amp-auto-ads-0.1.js">
+    </script>
+</head>
+
+<body class="loading">
+    <span id="config-title" style="display:none">OnionWing之家</span>
+    <div id="loader"></div>
+    <div id="single">
+    <div id="top" style="display: block;">
+    <div class="bar" style="width: 0;"></div>
+    <a class="iconfont icon-home image-icon" href="javascript:;" data-url="onionwing.github.io"></a>
+    <div title="播放/暂停" class="iconfont icon-play"></div>
+    <h3 class="subtitle">猫眼字体反爬</h3>
+    <div class="social">
+        <div>
+            <div class="share">
+                <a title="获取二维码" class="iconfont icon-scan" href="javascript:;"></a>
+            </div>
+            <div id="qr"></div>
+        </div>
+    </div>
+    <div class="scrollbar"></div>
+</div>
+
+    <div class="section">
+        <div class="article">
+    <div class='main'>
+        <h1 class="title">猫眼字体反爬</h1>
+        <div class="stuff">
+            <span>十一月 21, 2020</span>
+            
+  <ul class="post-tags-list" itemprop="keywords"><li class="post-tags-list-item"><a class="post-tags-list-link" href="/tags/python/" rel="tag">python</a></li><li class="post-tags-list-item"><a class="post-tags-list-link" href="/tags/%E5%AD%97%E4%BD%93%E5%8F%8D%E7%88%AC/" rel="tag">字体反爬</a></li><li class="post-tags-list-item"><a class="post-tags-list-link" href="/tags/%E5%AD%A6%E4%B9%A0/" rel="tag">学习</a></li></ul>
+
+
+        </div>
+        <div class="content markdown">
+            <h1 id="分析"><a href="#分析" class="headerlink" title="分析"></a>分析</h1><h2 id="浏览器调试窗口发现只有综合票房是争对爬虫进行了反爬"><a href="#浏览器调试窗口发现只有综合票房是争对爬虫进行了反爬" class="headerlink" title="浏览器调试窗口发现只有综合票房是争对爬虫进行了反爬"></a>浏览器调试窗口发现只有综合票房是争对爬虫进行了反爬</h2><p><img src="https://s3.ax1x.com/2020/11/21/DlxRrd.png" alt="1"></p>
+<h2 id="在network中发现每隔5s左右会重新申请数据，并且woff字体文件也会重新生成"><a href="#在network中发现每隔5s左右会重新申请数据，并且woff字体文件也会重新生成" class="headerlink" title="在network中发现每隔5s左右会重新申请数据，并且woff字体文件也会重新生成"></a>在network中发现每隔5s左右会重新申请数据，并且woff字体文件也会重新生成</h2><p><img src="https://s3.ax1x.com/2020/11/21/DlxWqA.png" alt="2"></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#找出woff文件并转化为xml格式</span></span><br><span class="line">headers = &#123;</span><br><span class="line">        <span class="string">'User-Agent'</span>: <span class="string">'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/86.0.4240.198 Safari/537.36'</span>,</span><br><span class="line">        <span class="string">'Referer'</span>: <span class="string">'https://piaofang.maoyan.com/dashboard/movie'</span>,</span><br><span class="line">        <span class="string">'Accept-Language'</span>: <span class="string">'zh-CN,zh;q=0.9'</span></span><br><span class="line">&#125;</span><br><span class="line">response = requests.get(<span class="string">"https://piaofang.maoyan.com/dashboard-ajax/movie"</span>, headers=headers)</span><br><span class="line">response.encoding = <span class="string">'UTF-8'</span></span><br><span class="line">woff = response.json()[<span class="string">'fontStyle'</span>]</span><br><span class="line">woff = re.findall(<span class="string">"(?&lt;=//).+?(?=\")"</span>, woff.split(<span class="string">' '</span>)[<span class="number">-1</span>])[<span class="number">0</span>]</span><br><span class="line">woff = requests.get(<span class="string">"http://"</span>+woff)</span><br><span class="line"><span class="keyword">with</span> open(<span class="string">"maoyan.woff"</span>, <span class="string">"wb"</span>) <span class="keyword">as</span> f:</span><br><span class="line">    <span class="keyword">for</span> chunk <span class="keyword">in</span> woff.iter_content(chunk_size=<span class="number">512</span>):</span><br><span class="line">        f.write(chunk)</span><br><span class="line">TTFont(<span class="string">'maoyan.woff'</span>).saveXML(<span class="string">'maoyan.xml'</span>)</span><br></pre></td></tr></table></figure>
+
+<p>查看数据并重写   </p>
+<p><img src="https://s3.ax1x.com/2020/11/21/Dlx2KH.png" alt="woff"></p>
+<p><a href="https://blog.csdn.net/dream_dt/article/details/82725398">woff文件解析</a></p>
+<h1 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h1><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> requests</span><br><span class="line"><span class="keyword">import</span> re</span><br><span class="line"><span class="keyword">from</span> fontTools.ttLib <span class="keyword">import</span> TTFont</span><br><span class="line"><span class="keyword">import</span> xmltodict</span><br><span class="line"><span class="keyword">import</span> os</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">main</span><span class="params">()</span>:</span></span><br><span class="line">    headers = &#123;</span><br><span class="line">        <span class="string">'User-Agent'</span>: <span class="string">'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/86.0.4240.198 Safari/537.36'</span>,</span><br><span class="line">        <span class="string">'Referer'</span>: <span class="string">'https://piaofang.maoyan.com/dashboard/movie'</span>,</span><br><span class="line">        <span class="string">'Accept-Language'</span>: <span class="string">'zh-CN,zh;q=0.9'</span></span><br><span class="line">    &#125;</span><br><span class="line">    response = requests.get(<span class="string">"https://piaofang.maoyan.com/dashboard-ajax/movie"</span>, headers=headers)</span><br><span class="line">    response.encoding = <span class="string">'UTF-8'</span></span><br><span class="line">    woff = response.json()[<span class="string">'fontStyle'</span>]</span><br><span class="line">    woff = re.findall(<span class="string">"(?&lt;=//).+?(?=\")"</span>, woff.split(<span class="string">' '</span>)[<span class="number">-1</span>])[<span class="number">0</span>]</span><br><span class="line">    woff = requests.get(<span class="string">"http://"</span>+woff)</span><br><span class="line">    movenamedict = &#123;&#125;</span><br><span class="line">    namedict = &#123;&#125;</span><br><span class="line">    <span class="keyword">with</span> open(<span class="string">"maoyan.woff"</span>, <span class="string">"wb"</span>) <span class="keyword">as</span> f:</span><br><span class="line">        <span class="keyword">for</span> chunk <span class="keyword">in</span> woff.iter_content(chunk_size=<span class="number">512</span>):</span><br><span class="line">            f.write(chunk)</span><br><span class="line">    TTFont(<span class="string">'maoyan.woff'</span>).saveXML(<span class="string">'maoyan.xml'</span>)</span><br><span class="line">    <span class="keyword">with</span> open(<span class="string">'maoyan.xml'</span>, <span class="string">'r'</span>) <span class="keyword">as</span> f:</span><br><span class="line">        xmldict = xmltodict.parse(f.read())</span><br><span class="line">    <span class="keyword">for</span> each <span class="keyword">in</span> xmldict[<span class="string">'ttFont'</span>][<span class="string">'cmap'</span>][<span class="string">'cmap_format_4'</span>][<span class="number">0</span>][<span class="string">'map'</span>]:</span><br><span class="line">        namedict[each[<span class="string">'@code'</span>]] = each[<span class="string">'@name'</span>]</span><br><span class="line">    numberdict = &#123;&#125;</span><br><span class="line">    <span class="keyword">for</span> each <span class="keyword">in</span> xmldict[<span class="string">'ttFont'</span>][<span class="string">'glyf'</span>][<span class="string">'TTGlyph'</span>]:  <span class="comment"># 重写</span></span><br><span class="line">        <span class="keyword">if</span> <span class="string">'uni'</span> <span class="keyword">in</span> each[<span class="string">'@name'</span>]:</span><br><span class="line">            <span class="keyword">if</span> type(each[<span class="string">'contour'</span>]) == list:</span><br><span class="line">                pt = each[<span class="string">'contour'</span>][<span class="number">0</span>][<span class="string">'pt'</span>]</span><br><span class="line">            <span class="keyword">else</span>:</span><br><span class="line">                pt = each[<span class="string">'contour'</span>][<span class="string">'pt'</span>]</span><br><span class="line">            <span class="keyword">if</span> pt[<span class="number">0</span>][<span class="string">'@x'</span>] == <span class="string">'42'</span>:</span><br><span class="line">                numberdict[each[<span class="string">'@name'</span>]] = <span class="string">'0'</span></span><br><span class="line">            <span class="keyword">elif</span> pt[<span class="number">0</span>][<span class="string">'@x'</span>] == <span class="string">'373'</span>:</span><br><span class="line">                numberdict[each[<span class="string">'@name'</span>]] = <span class="string">'1'</span></span><br><span class="line">            <span class="keyword">elif</span> pt[<span class="number">0</span>][<span class="string">'@x'</span>] == <span class="string">'503'</span>:</span><br><span class="line">                numberdict[each[<span class="string">'@name'</span>]] = <span class="string">'2'</span></span><br><span class="line">            <span class="keyword">elif</span> pt[<span class="number">0</span>][<span class="string">'@x'</span>] == <span class="string">'130'</span>:</span><br><span class="line">                numberdict[each[<span class="string">'@name'</span>]] = <span class="string">'3'</span></span><br><span class="line">            <span class="keyword">elif</span> pt[<span class="number">0</span>][<span class="string">'@x'</span>] == <span class="string">'323'</span>:</span><br><span class="line">                numberdict[each[<span class="string">'@name'</span>]] = <span class="string">'4'</span></span><br><span class="line">            <span class="keyword">elif</span> pt[<span class="number">0</span>][<span class="string">'@x'</span>] == <span class="string">'134'</span>:</span><br><span class="line">                numberdict[each[<span class="string">'@name'</span>]] = <span class="string">'5'</span></span><br><span class="line">            <span class="keyword">elif</span> pt[<span class="number">0</span>][<span class="string">'@x'</span>] == <span class="string">'410'</span>:</span><br><span class="line">                numberdict[each[<span class="string">'@name'</span>]] = <span class="string">'6'</span></span><br><span class="line">            <span class="keyword">elif</span> pt[<span class="number">0</span>][<span class="string">'@x'</span>] == <span class="string">'47'</span>:</span><br><span class="line">                numberdict[each[<span class="string">'@name'</span>]] = <span class="string">'7'</span></span><br><span class="line">            <span class="keyword">elif</span> pt[<span class="number">0</span>][<span class="string">'@x'</span>] == <span class="string">'177'</span>:</span><br><span class="line">                numberdict[each[<span class="string">'@name'</span>]] = <span class="string">'8'</span></span><br><span class="line">            <span class="keyword">elif</span> pt[<span class="number">0</span>][<span class="string">'@x'</span>] == <span class="string">'139'</span>:</span><br><span class="line">                numberdict[each[<span class="string">'@name'</span>]] = <span class="string">'9'</span></span><br><span class="line">    temp = namedict</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> list(temp):</span><br><span class="line">        namedict[<span class="string">'.'</span> + i] = <span class="string">'.'</span> + namedict[i]</span><br><span class="line">    temp = numberdict</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> list(temp):</span><br><span class="line">        numberdict[<span class="string">'.'</span> + i] = <span class="string">'.'</span> + numberdict[i]</span><br><span class="line">    <span class="keyword">for</span> each <span class="keyword">in</span> response.json()[<span class="string">'movieList'</span>][<span class="string">'list'</span>]:</span><br><span class="line">        unit = each[<span class="string">'splitBoxSplitUnit'</span>][<span class="string">"unit"</span>][<span class="number">0</span>]</span><br><span class="line">        number = each[<span class="string">'splitBoxSplitUnit'</span>][<span class="string">'num'</span>].replace(<span class="string">'&amp;#'</span>, <span class="string">'0'</span>).strip().split(<span class="string">';'</span>)</span><br><span class="line">        number.pop()</span><br><span class="line">        number = str(<span class="string">''</span>.join(list(map(<span class="keyword">lambda</span> n: numberdict[namedict[n]], number))))</span><br><span class="line">        movenamedict[each[<span class="string">'movieInfo'</span>][<span class="string">'movieName'</span>]] = number + unit</span><br><span class="line">    print(movenamedict)</span><br><span class="line">    os.remove(<span class="string">'maoyan.woff'</span>)</span><br><span class="line">    os.remove(<span class="string">'maoyan.xml'</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">'__main__'</span>:</span><br><span class="line">    main()</span><br></pre></td></tr></table></figure>
+
+
+            <!--[if lt IE 9]><script>document.createElement('audio');</script><![endif]-->
+            <audio id="audio" loop="1" preload="auto" controls="controls" data-autoplay="false">
+                <source type="audio/mpeg" src="">
+            </audio>
+            
+                <ul id="audio-list" style="display:none">
+                    
+                        
+                            <li title='0' data-url='http://link.hhtjim.com/163/425570952.mp3'></li>
+                        
+                    
+                        
+                            <li title='1' data-url='http://link.hhtjim.com/163/425570952.mp3'></li>
+                        
+                    
+                </ul>
+            
+        </div>
+        
+    <div id='gitalk-container' class="comment link"
+		data-enable='true'
+        data-ae='false'
+        data-ci='fafd5ae6b9dfae2a8d7a'
+        data-cs='e34f5df41575a867cf150e6445c3506548efd627'
+        data-r='hexo_gitalk'
+        data-o='onionwing'
+        data-a='onionwing'
+        data-d='false'
+    >查看评论</div>
+
+
+    </div>
+    
+</div>
+
+
+    </div>
+</div>
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"debug":false,"model":{"jsonPath":"/live2dw/assets/koharu.model.json"},"display":{"position":"right","width":145,"height":315},"mobile":{"show":true,"scale":1},"react":{"opacityDefault":0.7,"opacityOnHover":0.8},"log":false});</script></body>
+<script src="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js"></script>
+<script src="//lib.baomitu.com/jquery/1.8.3/jquery.min.js"></script>
+<script src="/js/plugin.js"></script>
+<script src="/js/typed.js"></script>
+<script src="/js/diaspora.js"></script>
+<link rel="stylesheet" href="/photoswipe/photoswipe.css">
+<link rel="stylesheet" href="/photoswipe/default-skin/default-skin.css">
+<script src="/photoswipe/photoswipe.min.js"></script>
+<script src="/photoswipe/photoswipe-ui-default.min.js"></script>
+
+<!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+    <!-- Background of PhotoSwipe. 
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+        <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+            <div class="pswp__top-bar">
+                <!--  Controls are self-explanatory. Order can be changed. -->
+                <div class="pswp__counter"></div>
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                      <div class="pswp__preloader__cut">
+                        <div class="pswp__preloader__donut"></div>
+                      </div>
+                    </div>
+                </div>
+            </div>
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div> 
+            </div>
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+</html>
